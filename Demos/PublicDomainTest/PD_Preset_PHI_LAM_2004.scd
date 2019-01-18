@@ -1,9 +1,9 @@
-// =====================
-// SAVE AS
-// Save this file with your own name appended
-// ex. PD_Start_Here_Bruno.scd
-// (same folder)
-// =====================
+// ==================================
+// Preset: PHI
+// Number of voices: 3
+// Most recent year sampled: 2003
+// Comments:
+// ==================================
 
 SCLOrkChat.new(\phi);
 // =========================================
@@ -35,42 +35,19 @@ c.free;
 // ==================================
 // Create a new time client, and one SCLOrkCLOck
 // This needs to be done ONLY ONCE after you open SuperCollider
-// BOTH will survive Ctrl+period
+// BOTH will survive Ctrl+period */
 ~timeClient = SCLOrkTimeClient.new;
 ~clock = SCLOrkClock.new(~timeClient); // UPDATE: THIS NOW SURVIVES CTRL+PERIOD
-*/
+
 // ========================================
 // PRINT THE BEATS IF YOU WANT TO SEE THEM
 // ========================================
 // If you hit Ctrl+period, you have to run this again to see the beats
-//~clock.play({ "server beats: %".format(~clock.beats).postln; ^1 });
+~clock.play({ "server beats: %".format(~clock.beats).postln; ^1 });
 
 // IF WORKING AT HOME, use a local clock instead of the above clock:
-~clock = TempoClock(60/60).permanent_(true);
+//~clock = TempoClock(60/60).permanent_(true);
 
-
-
-// =====================
-// BRIEF EXPLANATION
-// =====================
-
-// Open one of my Presets file template, save as with your own name and numbering, and start composing from there.
-
-// The goal is for you to compose one musical loop using a minimum of 4 and a maximum of 8 Pbindefs that run simultaneously.
-
-// I'm calling each of these pre-composed loops as "presets". You will compose one or more "presets" that we can use as backbone of our Public Domain piece. Feel free to create more than one preset and submit to me.
-
-// The best presets will be used to structure the final composition.
-
-// Save each of your presets as a separate file, like "PD_Preset_Bruno-1.scd", "PD_Preset_Bruno-2.scd", etc.
-
-// Each Pbindef plays a "part", much like an orchestral or choral part. So Pbindef(\p1) is player 1, Pbindef(\p2) is player 2, etc. Eventually these Pbindefs will be playing by real individual players in SCLOrk. As you compose, you play them all together in this file to check results. But keep in mind final goal (in a future week) will be to distribute the Pbindefs you create to separate SCLOrk players.
-
-// Change anything other parameter you want, but keep \dur always as 1/8. If you have a very specific need for a triplet, let me know and I'll help you. But a lot of great patterns can be created just with the 1/8 duration, and messing with the amp grid (the list of 0's and 1's).
-
-// You could have all your players using the same sample, or all using different samples, and you can control which portion of the sample is used, etc. Try to keep at least one of the samples in a very recognizable state -- can the audience tell what is one of the songs playing? We want that to happen at least some of the time.
-
-// Refer to the samples folder to see what samples are available. You just need to use the year plus the letter to refer to them inside the Pbindef (for example, '1990A', '1968A', etc). Note it must be inside single quotes.
 
 // ===============
 // COMPOSE!
@@ -82,6 +59,7 @@ c.free;
 
 //startPos: betweeon 0-1
 //dur: duration in beats
+//- sign before rate will reverse the sample
 
 
 // ================
@@ -119,7 +97,7 @@ Pbindef(\p2,
 	\dur, 1/2,
 	\rate, 1, //Pseq([1, 1.5, 2, 2.5], inf),
 	\startPos, Pseq([0.1, 0.197], inf),   // Rhythm A
-	/*\startPos, Pseq([0.11, 0.197], inf),*/  // Rhythm B--> cool rhythm change
+	/*\startPos, Pseq([0.11, 0.197], inf)*/,  // Rhythm B--> cool rhythm change
 	\att, 0.0,
 	\rel, 0.8,
 	\amp, 1
@@ -139,10 +117,10 @@ Pbindef(\p3,
 	\att, 0.5,
 	\rel, 0.3, //Pwhite(0.3, 0.6),
 	\amp, /*0.4,*/ Pseq([
-		1, 0, 0, 0,   1, 0, 0, 0, // beat 1
-		1, 0, 0, 0,   1, 0, 0, 0, // beat 2
-		1, 0, 0, 0,   1, 0, 0, 0, // beat 3
-		1, 0, 0, 0,   1, 0, 0, 0, // beat 4
+		1, 0, 0, 0, 0, 0, 0, 0,  1, 0, 0, 0, 0, 0, 0, 0, // beat 1
+		1, 0, 0, 0, 0, 0, 0, 0,  1, 0, 0, 0, 0, 0, 0, 0, // beat 2
+		1, 0, 0, 0, 0, 0, 0, 0,  1, 0, 0, 0, 0, 0, 0, 0, // beat 3
+		1, 0, 0, 0, 0, 0, 0, 0,  1, 0, 0, 0, 0, 0, 0, 0, // beat 4
 	], inf) * 0.2,
 ).play(~clock, quant: 4).quant = 4;
 )
