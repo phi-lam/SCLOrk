@@ -31,21 +31,48 @@ Ndef(\a, {
 }).play;
 )
 
+/* CURRENT TEST */
+
 (
 Ndef(\a, {
 	var harmonic, snd;
 	// round numbers to ensure integers only:
-	harmonic = MouseX.kr(2, 16).round(1) * LFPulse.ar(6).range(1,7).round(1);
+	harmonic = MouseX.kr(1, 16).round(1) * LFPulse.ar(43).range(1,7).round(1);
 	//harmonic = MouseX.kr(2, 3).round(1) * LFPulse.ar(8);
 
 
-	snd = LFSaw.ar(
+	snd = LFTri.ar(
 		freq: 43 * harmonic,
 		mul: MouseY.kr(0, 0.5)
 	);
+	snd = snd * LFPulse.ar(0.33, 0, 0.2);
 	snd = Limiter.ar(Mix.ar(snd));
 }).play;
 )
+
+
+/**** SAVE ****
+****
+***/
+
+(
+Ndef(\a, {
+	var harmonic, snd;
+	// round numbers to ensure integers only:
+	harmonic = MouseX.kr(1, 16).round(1) * LFPulse.ar(43).range(1,7).round(1);
+	//harmonic = MouseX.kr(2, 3).round(1) * LFPulse.ar(8);
+
+
+	snd = LFTri.ar(
+		freq: 43 * harmonic,
+		mul: MouseY.kr(0, 0.5)
+	);
+	snd = snd * LFPulse.ar(1);
+	snd = Limiter.ar(Mix.ar(snd));
+}).play;
+)
+
+
 
 
 // Piano C3 = 130.812
@@ -102,4 +129,23 @@ Ndef(\a, {
 	snd = Limiter.ar(Mix.ar(snd)); // don't change this line
 }).play;
 )
+// -- end of copied code
+
+// ++ code copied from davMo
+(
+Ndef(\a, {
+	var harmonic, snd;
+	// try out LFNoise1 and LFNoise2 as well:
+	harmonic = LFNoise0.kr(LFNoise0.kr(7).range(2, 19).round(1)).range(2,10).round(1); // two harmonics at same time
+	snd = Pulse.ar(
+		freq: [43 * harmonic, 43* harmonic/2, 43*harmonic/4],
+		mul: 0.4
+	);
+	snd = Limiter.ar(Mix.ar(snd));
+}).play;
+)
+// -- end of copied code
+
+// ++ JOSH BIRDS
+snd = snd * LFPulse.ar(SinOsc.kr(1/3).range(3, 17), 0, 0.1);
 // -- end of copied code
